@@ -96,7 +96,7 @@ class LandmarksDataset(torch.utils.data.Dataset):
         # padding of sequences to be of length seq_len
         padding = (len(landmarks) - self.seq_len)
         # add padding
-        if padding > 0:
+        if padding < 0:
             padd_points = np.zeros((padding, points.shape[-1]))
             points = np.concatenate(points, padd_points)
         
