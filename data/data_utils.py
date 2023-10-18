@@ -97,8 +97,8 @@ class LandmarksDataset(torch.utils.data.Dataset):
         padding = (len(landmarks) - self.seq_len)
         # add padding
         if padding < 0:
-            padd_points = np.zeros((padding, points.shape[-1]))
-            points = np.concatenate(points, padd_points)
+            padd_points = np.zeros((-padding, points.shape[-1]))
+            points = np.concatenate((points, padd_points))
         
         return torch.tensor(points), torch.tensor(label)
 
