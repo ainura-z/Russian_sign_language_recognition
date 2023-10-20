@@ -1,4 +1,5 @@
 import torch
+import torch.nn as nn
 
 
 def train(model, optimizer, train_loader, device, epoch, logger, criterion=nn.functional.nll_loss):
@@ -54,7 +55,6 @@ def test(model, test_loader, device, epoch, logger, criterion=nn.functional.nll_
             
             # Forward
             outputs = model(inputs)
-            print(outputs[0][0])
             loss = criterion(outputs, labels)
             
             # Accumulate testing loss and accuracy
