@@ -47,7 +47,7 @@ def extract_keypoints(results):
     # extracting right hand keypoints
     rh = torch.tensor([[res.x, res.y, res.z] for res in results.right_hand_landmarks.landmark]).flatten() if results.right_hand_landmarks else torch.tensor([0]*21*3)
     
-    return torch.concatenate([rh, lh])
+    return torch.concatenate([lh, rh])
     
 def get_frames(video_path, all_frames=True):
     """
