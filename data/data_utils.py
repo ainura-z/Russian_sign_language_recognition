@@ -2,6 +2,53 @@ import cv2
 import numpy as np
 import torch
 
+
+def mediapipe_detection(image, model):
+    """
+     Function for retrieving keypoints from frame
+
+    Inputs:
+        image - particular frame
+        model - Holistic model
+
+    Returns:
+        image - returning initial image 
+            for further drawing landmarks on it
+        results - all detected keypoints
+    """
+    
+    # COLOR CONVERSION BGR 2 RGB
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) 
+    # Image is no longer writeable
+    image.flags.writeable = False         
+    # Make prediction
+    results = model.process(image) 
+    # Image is now writeable
+    image.flags.writeable = True        
+    # COLOR COVERSION RGB 2 BGR
+    image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR) 
+    
+    return image, results
+    
+
+def extract_keypoints(results):
+     """
+     Function for extracting keypoints from results
+
+    Inputs:
+        results - all detected keypoints after model
+
+    Returns:
+        concatenated vector of right hand and left hand keypoints
+    """
+    
+    # extracting left hand keypoints
+    lh = torch.tensor([[res.x, res.y, res.z] for res in results.left_hand_landmarks.landmark]).flatten() if results.left_hand_landmarks else torch.tensor([0]*21*3)
+    # extracting right hand keypoints
+    rh = torch.tensor([[res.x, res.y, res.z] for res in results.right_hand_landmarks.landmark]).flatten() if results.right_hand_landmarks else torch.tensor([0]*21*3)
+    
+    return torch.concatenate([rh, lh])
+    
 def get_frames(video_path, all_frames=True):
     """
     Function for retrieving frames from video
