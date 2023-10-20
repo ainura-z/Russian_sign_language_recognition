@@ -3,7 +3,7 @@ import numpy as np
 import mediapipe as mp
 import torch
 from matplotlib import pyplot as plt
-
+from data.data_utils import mediapipe_detection, extract_keypoints
 
 # Keypoint using MP Holistic
 
