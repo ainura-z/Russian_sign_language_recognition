@@ -4,9 +4,10 @@ import mediapipe as mp
 import torch
 from matplotlib import pyplot as plt
 from data.data_utils import mediapipe_detection, extract_keypoints
+from utils.visualization import draw_styled_landmarks
+
 
 # Keypoint using MP Holistic
-
 # Holistic model
 mp_holistic = mp.solutions.holistic 
 # Drawing utilities
