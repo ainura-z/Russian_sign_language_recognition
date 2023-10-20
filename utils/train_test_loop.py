@@ -3,7 +3,17 @@ import torch.nn as nn
 
 
 def train(model, optimizer, train_loader, device, epoch, logger, criterion=nn.functional.nll_loss):
-    ''' Train the LSTM model '''
+    '''
+    Function for training the LSTM model
+    
+    :param model: model for training
+    :param optimizer: optimizer for model
+    :param train_loader: loader for training data
+    :param device: device (cuda or cpu)
+    :param epoch: specific epoch
+    :param logger: logger (wandb or tensorboard)
+    :param criterion: loss function
+    '''
     
     model.train()
     
@@ -41,7 +51,16 @@ def train(model, optimizer, train_loader, device, epoch, logger, criterion=nn.fu
 
 
 def test(model, test_loader, device, epoch, logger, criterion=nn.functional.nll_loss):
-    ''' Testing'''
+    '''
+    Function for testing the LSTM model
+    
+    :param model: model for training
+    :param test_loader: loader for training data
+    :param device: device (cuda or cpu)
+    :param epoch: specific epoch
+    :param logger: logger (wandb or tensorboard)
+    :param criterion: loss function
+    '''
     
     model.eval()
     
