@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 import mediapipe as mp
 import torch
-from matplotlib import pyplot as plt
 from data.data_utils import mediapipe_detection, extract_keypoints
 from utils.visualization import draw_styled_landmarks, prob_viz
 
@@ -56,7 +55,7 @@ def main():
 
             if len(sequence) == 32 and i % 30 == 0:
                 # print(np.array(sequence).shape)
-                res = nn.functional.softmax(model(sequence.unsqueeze(0)))
+                res = torch.nn.functional.softmax(model(sequence.unsqueeze(0)))
                 print(res) # print(nn.functional.softmax(res))
                 label = torch.max(res, 1)[1].item()
                 print("Label:", inv_lbl_encoding[label])
