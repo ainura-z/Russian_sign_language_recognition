@@ -18,3 +18,21 @@ def mediapipe_detection(image, model):
     image.flags.writeable = True                   
     image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR) 
     return image, results
+
+
+def extract_keypoints(results):
+    """
+     Function for extracting keypoints from results
+
+    Inputs:
+        results - all detected keypoints after model
+
+    Returns:
+        concatenated vector of right hand and left hand keypoints
+    """ 
+    # extracting left hand keypoints
+    lh = torch.tensor([[res.x, res.y, res.z] for res in results.left_hand_landmarks.landmark]).flatten() if results.left_hand_landmarks else torch.tensor([0]*21*3)
+    # extracting right hand keypoints
+    rh = torch.tensor([[res.x, res.y, res.z] for res in results.right_hand_landmarks.landmark]).flatten() if results.right_hand_landmarks else torch.tensor([0]*21*3)
+    
+    return torch.concatenate([lh, rh])

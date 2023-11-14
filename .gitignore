@@ -162,3 +162,5 @@ cython_debug/
 data.zip
 utils.zip
 model.zip
+
+wandb

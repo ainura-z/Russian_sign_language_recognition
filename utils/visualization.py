@@ -24,7 +24,6 @@ def draw_landm_points(frame, points):
     plt.imshow(frame)
     plt.scatter(x_coord,y_coord,c='r',s=15)
 
-
 def draw_styled_landmarks(image, results, mp_drawing, mp_holistic):
     """
     Draw landmarks(from mediapipe) on image
