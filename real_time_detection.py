@@ -48,7 +48,6 @@ def main():
             # frame = cv2.flip(frame, 1)
             # Make detections
             image, results = mediapipe_detection(frame, holistic)
-            # print(results)
 
             # Draw landmarks
             draw_styled_landmarks(image, results, mp_drawing, mp_holistic)
